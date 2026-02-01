@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Chitra ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;600&display=swap');
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #ff2a6d, #0b061f);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  font-family: 'Poppins', sans-serif;
+  color: white;
+}
+
+/* ✨ Sparkles */
+.sparkle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: white;
+  border-radius: 50%;
+  animation: sparkle 4s linear infinite;
+}
+
+@keyframes sparkle {
+  from { transform: translateY(100vh); opacity: 1; }
+  to { transform: translateY(-10vh); opacity: 0; }
+}
+
+/* 💎 Glass Card */
+.card {
+  width: 390px;
+  padding: 22px;
+  border-radius: 30px;
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 40px 120px rgba(0,0,0,0.7);
+  text-align: center;
+  animation: appear 1s ease;
+}
+
+@keyframes appear {
+  from { transform: scale(0.85) translateY(40px); opacity: 0; }
+  to { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+/* 📸 Image frame */
+.frame {
+  position: relative;
+  height: 260px;
+  border-radius: 22px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  box-shadow: inset 0 0 0 3px rgba(255,215,0,0.8);
+}
+
+/* blurred background */
+.frame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: blur(20px) brightness(0.7);
+  transform: scale(1.2);
+}
+
+/* real image */
+.frame img {
+  position: relative;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  animation: zoom 6s ease-in-out infinite;
+}
+
+@keyframes zoom {
+  0%,100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+
+/* 💖 Text */
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  margin: 16px 0;
+  animation: heartbeat 2s infinite;
+}
+
+@keyframes heartbeat {
+  0%,100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+/* ❤️ Buttons */
+.buttons {
+  position: relative;
+  height: 140px;
+}
+
+button {
+  padding: 14px 32px;
+  font-size: 18px;
+  border-radius: 40px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#yes {
+  background: linear-gradient(135deg, gold, #ff2a6d);
+  color: black;
+  box-shadow: 0 0 30px gold;
+}
+
+#no {
+  position: absolute;
+  left: 210px;
+  top: 10px;
+  background: white;
+}
+
+/* ❤️ floating hearts */
+.heart {
+  position: absolute;
+  font-size: 22px;
+  animation: float 6s linear forwards;
+}
+
+@keyframes float {
+  from { transform: translateY(100vh); opacity: 1; }
+  to { transform: translateY(-10vh); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <div class="frame" id="frame">
+    <img id="photo" src="Pic_1.jpg">
+  </div>
+
+  <h1>Chitra, will you be my Valentine? 💍❤️</h1>
+
+  <div class="buttons">
+    <button id="yes" onclick="yesClicked()">Yes 💖</button>
+    <button id="no" onmouseenter="moveNo()">No 🙈</button>
+  </div>
+</div>
+
+<script>
+/* 📸 Image slider with blur sync */
+const pics = [
+  "Ring.jpeg","Pic_1.jpg","Pic_2.jpg","Pic_3.jpg","Pic_4.jpeg","Pic_5.jpeg",
+  "Pic_6.jpeg","Pic_7.jpeg","Pic_8.jpeg","Pic_9.jpeg","Pic_10.jpeg",
+  "Pic_11.jpeg","Pic_12.jpeg","Pic_13.jpeg","Pic_14.jpeg","Pic_15.jpeg"
+];
+
+let i = 0;
+const img = document.getElementById("photo");
+const frame = document.getElementById("frame");
+
+setInterval(() => {
+  i = (i + 1) % pics.length;
+  img.src = pics[i];
+  frame.style.setProperty("--bg", `url(${pics[i]})`);
+  frame.style.backgroundImage = `url(${pics[i]})`;
+}, 2500);
+
+/* 😈 NO runs away */
+function moveNo() {
+  const no = document.getElementById("no");
+  no.style.left = Math.random() * 250 + "px";
+  no.style.top = Math.random() * 100 + "px";
+}
+
+/* 🎉 YES celebration */
+function yesClicked() {
+  document.body.innerHTML = `
+    <div style="
+      height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      background:radial-gradient(circle,gold,#ff2a6d);
+      color:black;
+      font-family:Poppins;
+      text-align:center;">
+      <div>
+        <h1 style="font-size:44px;">SHE SAID YES 💍💖</h1>
+        <p style="font-size:24px;">Chitra ❤️ Forever</p>
+        <div style="font-size:60px;">🎉❤️🎉</div>
+      </div>
+    </div>
+  `;
+}
+
+/* ✨ sparkles */
+setInterval(() => {
+  const s = document.createElement("div");
+  s.className = "sparkle";
+  s.style.left = Math.random() * 100 + "vw";
+  s.style.animationDuration = (3 + Math.random() * 3) + "s";
+  document.body.appendChild(s);
+  setTimeout(() => s.remove(), 6000);
+}, 200);
+
+/* ❤️ hearts */
+setInterval(() => {
+  const h = document.createElement("div");
+  h.className = "heart";
+  h.innerHTML = "❤️";
+  h.style.left = Math.random() * 100 + "vw";
+  document.body.appendChild(h);
+  setTimeout(() => h.remove(), 6000);
+}, 400);
+</script>
+
+</body>
+</html>
