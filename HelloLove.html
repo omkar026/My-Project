@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Chitra ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  min-height: 100vh;
+  background:
+    linear-gradient(rgba(255,245,248,0.9), rgba(255,245,248,0.9)),
+    repeating-linear-gradient(
+      0deg,
+      #e6e6e6,
+      #e6e6e6 1px,
+      transparent 1px,
+      transparent 28px
+    );
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.card {
+  background: #fff;
+  width: 370px;
+  padding: 20px;
+  border-radius: 24px;
+  box-shadow: 0 20px 45px rgba(0,0,0,0.25);
+  position: relative;
+  animation: pop 0.8s ease;
+}
+
+@keyframes pop {
+  from { transform: scale(0.85); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* 📸 Polaroid look */
+.slider {
+  background: #fafafa;
+  padding: 12px;
+  border-radius: 18px;
+  box-shadow: inset 0 0 0 1px #eee;
+  margin-bottom: 16px;
+}
+
+.slider img {
+  width: 100%;
+  border-radius: 14px;
+  display: none;
+}
+
+.slider img.active {
+  display: block;
+  animation: fade 1s ease;
+}
+
+@keyframes fade {
+  from { opacity: 0; transform: scale(1.02); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+h1 {
+  font-size: 23px;
+  color: #c2185b;
+  margin: 14px 0 18px;
+  text-align: center;
+}
+
+/* ❤️ Buttons */
+.buttons {
+  position: relative;
+  height: 130px;
+}
+
+button {
+  padding: 13px 26px;
+  font-size: 17px;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+#yes {
+  background: linear-gradient(135deg, #ff4d6d, #c2185b);
+  color: white;
+  box-shadow: 0 6px 18px rgba(194,24,91,0.45);
+}
+
+#no {
+  background: #f0f0f0;
+  position: absolute;
+  left: 190px;
+  top: 10px;
+}
+
+/* 💕 Floating hearts */
+.heart {
+  position: absolute;
+  color: #ff4d6d;
+  font-size: 22px;
+  animation: float 6s linear infinite;
+}
+
+@keyframes float {
+  from { transform: translateY(110vh); opacity: 1; }
+  to { transform: translateY(-10vh); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🎵 Background music -->
+<audio id="bgMusic" autoplay loop>
+    <source src="Perfect.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+<div class="card">
+  <div class="slider">
+    <img src="Ring.jpeg" class="active">
+    <img src="Pic_1.jpg">
+    <img src="Pic_2.jpg">
+    <img src="Pic_3.jpg">
+    <img src="Pic_4.jpeg">
+    <img src="Pic_5.jpeg">
+    <img src="Pic_6.jpeg">
+    <img src="Pic_7.jpeg">
+    <img src="Pic_8.jpeg">
+    <img src="Pic_9.jpeg">
+    <img src="Pic_10.jpeg">
+    <img src="Pic_11.jpeg">
+    <img src="Pic_12.jpeg">
+    <img src="Pic_13.jpeg">
+    <img src="Pic_14.jpeg">
+    <img src="Pic_15.jpeg">
+  </div>
+
+  <h1>Chitra, will you be my Valentine? 💖</h1>
+
+  <div class="buttons">
+    <button id="yes" onclick="yesClicked()">Yes 💕</button>
+    <button id="no" onmouseenter="moveNo()">No 🙈</button>
+  </div>
+</div>
+
+<script>
+// 📸 Image slider
+let index = 0;
+const images = document.querySelectorAll(".slider img");
+
+setInterval(() => {
+  images[index].classList.remove("active");
+  index = (index + 1) % images.length;
+  images[index].classList.add("active");
+}, 2200);
+
+// 😈 NO button escape
+function moveNo() {
+  const no = document.getElementById("no");
+  no.style.left = Math.random() * 220 + "px";
+  no.style.top = Math.random() * 90 + "px";
+}
+
+// 💖 YES clicked
+function yesClicked() {
+  document.body.innerHTML = `
+    <div style="
+      height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+      font-family:Poppins;
+      text-align:center;">
+      <div>
+        <h1 style="font-size:36px;color:#c2185b;">YAY!!! 💖</h1>
+        <p style="font-size:24px;">Chitra said YES 🥰</p>
+        <div style="font-size:46px;">❤️💍❤️</div>
+      </div>
+    </div>
+  `;
+}
+
+// 💕 Floating hearts
+setInterval(() => {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "❤️";
+  heart.style.left = Math.random() * 100 + "vw";
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 6000);
+}, 450);
+// 🎵 NEW: Play background music on first user click
+const bgMusic = document.getElementById("bgMusic");
+document.body.addEventListener("click", () => {
+  bgMusic.play().catch(() => console.log("User interaction required to play audio"));
+}, { once: true });
+</script>
+
+</body>
+</html>
